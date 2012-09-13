@@ -1,0 +1,223 @@
+<html>
+<title> </title>
+<head>
+<link rel="stylesheet" href="{{MEDIA_URL}}/style.css" type="text/css">
+<script type="text/javascript" src="{{MEDIA_URL}}/jquery.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}/expander.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}/expander_min.js"></script>
+
+
+<script type = "text/javascript">
+	$(document).ready(function(){
+	var last_id = 0;
+	
+
+	
+			$.ajax({
+			type: "POST",
+			content_type: "application/json;",
+			url: "/get_all_user_request/",
+			datatype: "json",
+			success: function( all_user_request ){				
+				$.each(all_user_request, function(index, value){
+				
+				var first_array = all_user_request[index]['all_user_request'];
+								
+				$.each( first_array, function(index, val){
+				
+				request_id  = first_array[index]['pk'];
+				title_val =  first_array[index]['fields']['title'];
+				primary_assignee_val = first_array[index]['fields']['primary_assignee'];
+				creation_date_val = first_array[index]['fields']['creation_date'];
+				department_val = first_array[index]['fields']['department'];
+				description_val = first_array[index]['fields']['description'];
+				total_count = all_user_request[0]['total_count'][request_id];
+				
+				
+				var id="/update_request_page/?request_id=" + request_id;
+				var view_id="/view_page/?request_id=" + request_id;
+				var update_id = "/update_request_page/?request_id=" + request_id;
+				var id_for_attachment = "/show_attachment/?request_id=" + request_id;
+			
+				//$('#user_created_request').append('<div class="fields"><label>'+ request_id +'</label><label> <a href ="'+id+'">' + title_val + '</a></label><label>'+ creation_date_val + '</label><label>' +
+			  	//primary_assignee_val + '</label><label>' + department_val+ '</label><label id="desc_label"><div class="test">' + description_val + '</div></label><a href ="'+id_for_attachment+'">'+ total_count +'</a><form method="GET" action="/edit_form/" style = "display:inline"> <input type="hidden" value='+request_id+' name="request_id" /> <input type="submit" value="Comment"></form></div>');
+				
+				
+				$('#user_created_request').append('<div class="fields"><label>'+ request_id +'</label><label>' + title_val + '</label><label>'+ creation_date_val + '</label><label>' +
+			  	primary_assignee_val +'</label><label><a href="'+view_id+'">' +'View'+'</a></label><label><a href ="'+id+'">'+ 'Update' +'</a></label></div>');
+				
+				
+				}); // end of first_array loop
+				
+				
+				}); //end of all_user_request loop
+				
+			$('div.test').expander({
+  slicePoint: 45,
+  widow: 2,
+  expandEffect: 'show',
+  userCollapseText: 'Read less'
+});
+			
+		}//end of success function block 
+});
+
+});
+
+</script>
+
+<script type = "text/javascript">
+	$(document).ready(function(){
+			$.ajax({
+			type: "POST",
+			content_type: "application/json;",
+			url: "/get_all_primary_assigned_request/",
+			datatype: "json",
+			success: function( all_primary_requests ){
+			$.each(all_primary_requests, function(index, value){
+			
+				var first_array = all_primary_requests[index]['all_primary_requests'];
+								
+				$.each( first_array, function(index, val){
+				request_id  = first_array[index]['pk'];
+				title_val =  first_array[index]['fields']['title'];
+				primary_assignee_val = first_array[index]['fields']['primary_assignee'];
+				creation_date_val = first_array[index]['fields']['creation_date'];
+				department_val = first_array[index]['fields']['department'];
+				description_val = first_array[index]['fields']['description'];
+				total_count = all_primary_requests[0]['total_count'][request_id];
+			
+				var id="/update_request_page/?request_id=" + request_id;
+				var id_for_attachment = "/show_attachment/?request_id=" + request_id;
+				var view_id="/view_page/?request_id=" + request_id;
+				var update_id = "/update_request_page/?request_id=" + request_id;
+			 
+			 //$('#user_assigned_request').append('<div class="fields"><label>'+ request_id +'</label><label>' + title_val + '</label><label>'+ creation_date_val + '</label><label><font color="red">' +
+			  //primary_assignee_val + '</font></label><label>' + department_val+ '</label><label><div class="test">' + description_val + '</div></label>&nbsp;&nbsp;&nbsp;<a href ="'+id_for_attachment+'">'+ total_count +'</a>&nbsp;&nbsp;&nbsp;<form method="GET" action="/edit_form/" style="display:inline"> <input type="hidden" value='+request_id+' name="request_id" /> <input type="submit" value="Comment"></form></div>');
+			  
+			  $('#user_assigned_request').append('<div class="fields"><label>'+ request_id +'</label><label>' + title_val + '</label><label>'+ creation_date_val + '</label><label><font color="red">' +
+			  	primary_assignee_val +'</font></label><label><a href="'+view_id+'">' +'View'+'</a></label></div>');
+			  
+			});
+});
+
+$('div.test').expander({
+  slicePoint: 45,
+  widow: 2,
+  expandEffect: 'show',
+  userCollapseText: 'Read less'
+});
+
+		
+		} //end of success function
+});	
+});
+
+</script>
+
+<script type = "text/javascript">
+	$(document).ready(function(){
+			$.ajax({
+			type: "POST",
+			content_type: "application/json;",
+			url: "/get_all_assigned_request/",
+			datatype: "json",
+			success: function( assigned_request ){
+			$.each(assigned_request, function(index, value){
+			
+			var first_array = assigned_request[index]['assigned_request'];
+								
+				$.each( first_array, function(index, val){
+				request_id  = first_array[index]['pk'];
+				title_val =  first_array[index]['fields']['title'];
+				primary_assignee_val = first_array[index]['fields']['primary_assignee'];
+				creation_date_val = first_array[index]['fields']['creation_date'];
+				department_val = first_array[index]['fields']['department'];
+				description_val = first_array[index]['fields']['description'];
+				total_count = assigned_request[0]['total_count'][request_id];
+				var id="/update_request_page/?request_id=" + request_id;
+				var id_for_attachment = "/show_attachment/?request_id=" + request_id;
+				var view_id="/view_page/?request_id=" + request_id;
+				var update_id = "/update_request_page/?request_id=" + request_id;
+			 
+			// $('#user_assigned_request').append('<div class="fields"><label>'+ request_id +'</label><label>' + title_val + '</label><label>'+ creation_date_val + '</label><label>' +primary_assignee_val + '</font></label><label>' + department_val+ '</label><label><div class="test">' + description_val + '</div></label>&nbsp;&nbsp;&nbsp;<a href ="'+id_for_attachment+'">'+ total_count +'</a>&nbsp;&nbsp;&nbsp;<form method="GET" action="/edit_form/" style="display:inline"> <input type="hidden" value='+request_id+' name="request_id" /> <input type="submit" value="Comment"></form></div>');
+			
+			$('#user_assigned_request').append('<div class="fields"><label>'+ request_id +'</label><label>' + title_val + '</label><label>'+ creation_date_val + '</label><label>' +
+			  	primary_assignee_val +'</label><label><a href="'+view_id+'">' +'View'+'</a></label></div>');
+			  
+});
+			  
+			});
+			
+			
+$('div.test').expander({
+  slicePoint: 45,
+  widow: 2,
+  expandEffect: 'show',
+  userCollapseText: 'read less'
+});
+		
+		}//end of success function block 
+		
+});	
+});
+
+</script>
+
+
+ 
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="container">
+	<div class="header">
+	<img src="{{MEDIA_URL}}header.jpg" width="160px; height:30px;" />
+	<div align="right">
+	<a href="/logout/">LOGOUT</a>
+	</div>
+</div>
+
+
+<form method="POST" action="/new_request/">
+
+	<div class="inner">
+		<label>Request Raised:<br></label> 
+		<div class="fields">
+		<label> Request Id</label><label> Title</label> <label> Date </label> <label>Primary Assignee</label> 
+		
+		</div>
+		
+		<div class="fields" id ="user_created_request">
+		</div>
+		
+		<label>Request Assigned:<br></label> 
+		
+		<div class="fields"> 
+		<label> Request Id</label><label> Title</label> <label> Date </label> <label>Primary Assignee</label>
+		
+		</div>
+		
+		<div class="fields" id ="user_assigned_request">
+		</div>
+		
+		<!---<button type="button" onclick="window.location='/home/'">Back</button>--->
+		<button type="button" onclick="window.location='/create_new/'">Raise Request</button>
+		{% if request.user.is_superuser or request.user.admin == 'yes' %}
+		<form method="GET" action="/create_user/">
+		<input type="submit" value="Create User" />
+
+		{% endif %}
+	</div>
+
+</form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+1.CSS Cookbook
+2.Sed and Awk(Arnold Robbins)
+3.Leading geeks: how to manage and lead people who deliver technology (Paul Glen, David H. Maister)
+4.The Battle of Salamis:The Naval Encounter That Saved Greece -- and Western Civilization(Barry Strauss)
+5.The Art of War (Sun Tzu, Samuel B. Griffith)

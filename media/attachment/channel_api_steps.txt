@@ -1,0 +1,8 @@
+1.Server creates unique channel and token for individual clients.
+
+2.client retrive the token and listen the channel regarding other clients.
+
+3.Client Id is useful for server to identify the client and Tokens are useful for client to connect and listen the 
+  channel created for it.
+
+4.Messages are received by server through HTTp requests and passed to the designated client via correct channel.

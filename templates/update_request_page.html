@@ -1,0 +1,160 @@
+<html>
+<title> </title>
+<head>
+<link rel="stylesheet" href="{{MEDIA_URL}}/style.css" type="text/css">
+<link rel="stylesheet" href="{{MEDIA_URL}}/markitup_style2.css" type="text/css">
+<link rel="stylesheet" href="{{MEDIA_URL}}/markitup_style.css" type="text/css">
+<script type="text/javascript" src="{{MEDIA_URL}}/jquery.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}/markitup.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}/set.js"></script>
+
+<script type="text/javascript" >
+   $(document).ready(function() {
+      $("#id_desc").markItUp(mySettings);
+   });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+$('#database_users option').dblclick(function() {
+$(this).clone().appendTo("#user_added");
+});
+
+$('#user_added').dblclick(function() {
+$('#user_added option:selected').remove();
+});
+
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#id_update').click(function(){
+	$('#user_added option').prop("selected", true);
+});
+});
+</script>
+</head>
+
+<body>
+
+<div class="container">
+	<div class="header">
+	<img src="{{MEDIA_URL}}header.jpg" width="160px; height:30px;" />
+	<div align="right">
+	</div>
+</div>
+
+<form method="POST" action="/update_request/">
+
+{% if all_request_info %}
+	<div class="inner">
+		<div class="fields"> 
+		<label> Title</label>
+		<input type="hidden" name="request_id" id="request_id" value= "{{ all_request_info.pk }}">
+		<input type="text" maxlength="200" name="title" id="id_title" value="{{ all_request_info.title }}">
+		</div>
+		<div class="fields">
+		<label>Assigned To</label>
+		<input type="text" maxlength="30" name="ticketowner" id="id_towner" value="{{ all_request_info.primary_assignee }}">
+		</div>
+		
+		<div class="fields">
+		<label>Other Assignees</label>
+		<select name="user_added" multiple id="user_added">
+		{% for data in all_owners_info %}
+		<option>{{data.request_owner}}</option>
+		{% endfor %}
+		</select>
+		
+		<select name="database_users" multiple id="database_users">
+		{% for users in all_users %}
+		<option name="{{users.username}}">{{users.first_name|capfirst}} {{users.last_name|capfirst}}</option>
+		{% endfor %}
+		</select>
+		
+		</div>
+		
+		<input type="hidden" maxlength="30" name="creator" id="id_creator" value="{{ all_request_info.creator }}">
+		
+		<div class="fields">
+		<label>Department</label>
+		<select name="department" style="width:150px;">
+		<option {% ifequal all_request_info.department 'IT' %} selected {% endifequal %}>IT</option>
+		<option {% ifequal all_request_info.department 'HR' %} selected {% endifequal %}>HR</option>
+		<option {% ifequal all_request_info.department 'Admin' %} selected {% endifequal %}>Admin</option>	
+		<option {% ifequal all_request_info.department 'Development' %} selected {% endifequal %}>Development</option>		
+		</select>
+		<!---<input type="text" maxlength="30" name="department" id="id_dept" value="{{ all_request_info.department }}">--->
+		</div>
+		
+		<!---<div class="fields">
+		<label> Status</label>	
+		<input type="text" maxlength="30" name="status" id="id_status" value= "{{ all_request_info.status }}" >
+		</div>
+		
+		<div class="fields">
+		<label> Priority </label>	
+		<input type="text" maxlength="30" name="priority" id="id_priority" value= "{{ all_request_info.priority }}" >
+		</div>
+		
+		<div class="fields">
+		<label> Severity </label>	
+		<input type="text" maxlength="30" name="severity" id="id_severity" value= "{{ all_request_info.severity }}" >
+		</div>
+		
+		<div class="fields">
+		<label>Creation Date </label>	
+		<label>{{ all_request_info.creation_date }}<input type="hidden" name="creation_date" value="{{all_request_info.creation_date|date:'c'}}" /></label>
+		</div>
+		
+		<div class="fields">
+		<label>Last modified Date </label>	
+		<label>{{ all_request_info.last_modified_date }}</label>
+		</div>
+		
+		<div class="fields">
+		<input type="text" maxlength="30" name="status" id="id_status" value= "{{ all_request_info.status }}" >
+		</div>--->
+		
+		
+		<div>
+			<label>Severity</label><br />
+		<select name="severity" style="width:150px;">
+		<option {% ifequal all_request_info.severity 'Medium' %} selected {% endifequal %}>Medium</option>
+		<option {% ifequal all_request_info.severity 'High' %} selected {% endifequal %}>High</option>
+		<option {% ifequal all_request_info.severity 'Low' %} selected {% endifequal %}>Low</option>			
+		</select>
+		</div>
+		
+		<div>
+			<label>Priority</label> <br />
+			<select name="priority" style="width:150px;">
+		<option {% ifequal all_request_info.priority 'Low' %} selected {% endifequal %}>Low</option>
+		<option {% ifequal all_request_info.priority 'High' %} selected {% endifequal %}>High</option>
+		<option {% ifequal all_request_info.priority 'Urgent' %} selected {% endifequal %}>Urgent</option>			
+		</select>
+		</div>
+		
+		
+		<div class="fields">
+		<label> Description</label>
+		<textarea name="description" id="id_desc">{{ all_request_info.description|safe }}</textarea>
+		</div>
+		
+		<input type="hidden" value="False" name="attach_file">
+		<input type="checkbox" value="True" name="attach_file"> I want to update attachment for this request.
+		
+		<div class="fields">
+		<label></label>
+		<input id="id_update" type="submit" value="Update" />
+		<button type="button" onclick="window.location='/home/'">Back</button>
+		</div>
+	</div>
+{% endif %}
+</form>
+</div>
+</body>
+</html>

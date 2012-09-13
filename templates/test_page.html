@@ -1,0 +1,11 @@
+{% load pagination_tags %}
+<html>
+<body>
+{% autopaginate result 1 %}
+{% for element in result %}
+  {{ element.title }}
+{% endfor %}
+{% paginate %}
+
+</body>
+</html>

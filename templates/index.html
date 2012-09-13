@@ -1,0 +1,178 @@
+<html>
+<title> </title>
+<head>
+<link rel="stylesheet" href="{{MEDIA_URL}}/style.css" type="text/css">
+<link rel="stylesheet" href="{{MEDIA_URL}}/markitup_style2.css" type="text/css">
+<link rel="stylesheet" href="{{MEDIA_URL}}/markitup_style.css" type="text/css">
+<script type="text/javascript" src="{{MEDIA_URL}}/jquery.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}/markitup.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}/set.js"></script>
+
+
+
+
+<script type="text/javascript" >
+   $(document).ready(function() {
+      $("#id_desc").markItUp(mySettings);
+   });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+$('#database_users option').dblclick(function() {
+var mytext = $("#mytext").val();
+var current_val = $(this).val();
+if ( mytext == current_val ){
+alert("Primary assignee can not be secondary assignee");
+}
+else{
+$(this).clone().appendTo("#user_added");
+}
+});
+
+$('#user_added').dblclick(function() {
+$('#user_added option:selected').remove();
+});
+
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#id_submit').click(function(){
+	$('#user_added option').prop("selected", true);
+});
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#ticketowner").change(function(){
+	var current_assignee = $(this).val();
+	$("#mytext").val(current_assignee);
+	}); 
+});
+</script>
+
+</head>
+
+<body>
+
+
+<div class="container">
+	<div class="header">
+	<img src="{{MEDIA_URL}}header.jpg" width="160px; height:30px;" />
+	<div align="right">
+	<a href="/logout/">LOGOUT</a>
+	</div>
+	</div>
+
+
+	
+<form method="POST" action="/create_new_request/" id="myform">
+	<div class="inner">
+		
+		<div class="fields"> 
+		<label> Title</label>
+		<input type="text" maxlength="200" name="title" id="id_title">
+		</div>
+		
+		
+		<div class="fields">
+		<label> Department</label>	
+		<select name="department" style="width:150px;">
+		<option>IT</option>
+		<option>HR</option>
+		<option>Admin</option>	
+		<option>Development</option>		
+		</select>
+		</div>
+		
+		<div class="fields">
+		<label>Assigned To</label>
+		<select name="ticketowner" style="width:150px;" id="ticketowner">
+		{% for users in all_users %}
+		<option name="{{users.username}}">{{users.first_name|capfirst}} {{users.last_name|capfirst}}</option>
+		{% endfor %}
+		</select>
+		</div>
+	
+		
+		<div class="fields">
+		<label> Description</label>
+		<textarea name="description" id="id_desc"></textarea>
+		
+		
+		<select name="user_added" multiple id="user_added" width="100" style="width: 100px">
+		</select>
+		
+		<select name="database_users" multiple id="database_users">
+		{% for users in all_users %}
+		<option name="{{users.username}}">{{users.first_name|capfirst}} {{users.last_name|capfirst}}</option>
+		{% endfor %}
+		</select>		
+		</div>
+		
+		<div class="fields">
+		<label></label>
+		<input id="id_submit" type="submit" value="Submit" />
+		<button type="button" onclick="window.location='/home/'">Back</button>
+		</div>
+		
+		
+		<div style="position:absolute; left:320px; top:60px; ">
+			<div style="width:200px; float:left; border:2px solid #444444; border-radius:6px; -moz-border-radius:6px; margin:0 5px 0 0;">
+			<label>Severity</label><br />
+			<input type="radio" name="sev_radio" value="High"> High
+			<input type="radio" name="sev_radio" value="Medium"> Medium
+			<input type="radio" name="sev_radio" value="Low">Low
+			</div>
+			<div style="width:200px; float:left; border:2px solid #444444; border-radius:6px; -moz-border-radius:6px;">
+			<label>Priority</label> <br />
+			<input type="radio" name="pri_radio" value="High"> Low
+			<input type="radio" name="pri_radio" value="Medium"> High
+			<input type="radio" name="pri_radio" value="Low"> Urgent
+			</div>
+		</div>
+		<div style=" position:absolute; right:30px; top:10px;">
+			<div style="box-shadow:3px 3px 5px #666666; width:180px; border:2px solid; border-radius:6px; -moz-border-radius:6px;">
+				<div><label>Date:</label> <label>{{ creation_date }}</label></div>
+				
+			<div><label>Status:</label> 
+				{% if request.user.is_superuser %}
+				<select name="status" id="status">
+					<option  selected="selected">Open</option>
+					<option>On-hold</option>
+					<option>Closed</option>			
+				</select>
+				{% else %}
+				<input type="text" name="status" value="Open"  />
+				{% endif %}
+				<input type="hidden" name="mytext" id="mytext" />
+				
+				 </div>
+			</div>
+			
+		
+		</div>
+		<input type="hidden" value="False" name="attach_file">
+		<input type="checkbox" value="True" name="attach_file"> I want to attach file with this request.
+	</div>
+</form>
+
+
+
+	<div class="inner">
+		<div id="mydiv">
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+</body>
+</html>

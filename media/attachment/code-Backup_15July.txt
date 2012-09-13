@@ -1,0 +1,522 @@
+{% include "header.html" %}
+{% include "base.html" %}
+<html>
+<title>
+HR Portal
+</title>
+<head>
+
+<script type="text/javascript" charset="utf-8">
+			$(document).ready( function () {
+				$('#tableId').dataTable( {
+					"sDom": '<"H"lfrT>t',
+					"oTableTools": {
+									"sSwfPath": "{{MEDIA_URL}}/copy_cvs_xls_pdf.swf"
+									
+		}
+				} );
+				
+				
+			$('#tableId2').dataTable( {
+					"sDom": '<"H"lfrT>t',
+					"oTableTools": {
+									"sSwfPath": "{{MEDIA_URL}}/copy_cvs_xls_pdf.swf"
+									
+		}
+				} );
+			} );
+</script>
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+ var oTable2=$("#tableId").dataTable(
+ {
+						"bPaginate": true,
+                        "bLengthChange": true,
+                        "bJQueryUI": true,
+                        "bFilter": true,
+                        "bSort": true,
+                        "bInfo": true,
+                        "bRetrieve":true,
+                        "bAutoWidth": true,
+                     	"aoColumns": [
+                                null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null
+								
+                    			]
+ });
+ 
+ var asInitVals = new Array();
+$("tfoot input").keyup( function () {
+		oTable2.fnFilter( this.value, oTable2.oApi._fnVisibleToColumnIndex( 
+			oTable2.fnSettings(), $("tfoot input").index(this) ));
+	} );
+	
+	
+	
+	/*
+	 * Support functions to provide a little bit of 'user friendlyness' to the textboxes in 
+	 * the footer
+	 */
+	$("tfoot input").each( function (i) {
+		asInitVals[i] = this.value;
+	} );
+	
+	$("tfoot input").focus( function () {
+		if ( this.className == "search_init" )
+		{
+			this.className = "";
+			this.value = "";
+		}
+	} );
+	
+	$("tfoot input").blur( function (i) {
+		if ( this.value == "" )
+		{
+			this.className = "search_init";
+			this.value = asInitVals[$("tfoot input").index(this)];
+		}
+	} );
+	
+ });
+                    			         
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ var oTable=$("#tableId2").dataTable(
+ {
+						"bPaginate": true,
+                        "bLengthChange": true,
+                        "bJQueryUI": true,
+                        "bFilter": true,
+                        "bSort": true,
+                        "bInfo": true,
+                        "bRetrieve":true,
+                        "bAutoWidth": true,
+                     	"aoColumns": [
+                                null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null
+                    			]
+ });
+ 
+ var asInitVals = new Array();
+$("tfoot input").keyup( function () {
+		oTable.fnFilter( this.value, oTable.oApi._fnVisibleToColumnIndex( 
+			oTable.fnSettings(), $("tfoot input").index(this) ));
+	} );
+	
+	
+	
+	/*
+	 * Support functions to provide a little bit of 'user friendlyness' to the textboxes in 
+	 * the footer
+	 */
+	$("tfoot input").each( function (i) {
+		asInitVals[i] = this.value;
+	} );
+	
+	$("tfoot input").focus( function () {
+		if ( this.className == "search_init" )
+		{
+			this.className = "";
+			this.value = "";
+		}
+	} );
+	
+	$("tfoot input").blur( function (i) {
+		if ( this.value == "" )
+		{
+			this.className = "search_init";
+			this.value = asInitVals[$("tfoot input").index(this)];
+		}
+	} );
+ });
+                    			         
+</script>
+
+
+
+<script>
+	$(function() {
+		
+		$("#tabs").tabs();
+	});
+</script>
+
+
+<script>
+$(document).ready(function(){
+	$("#tabs").tabs({
+		"show": function(event, ui) {
+			var oTable = $('div.dataTables_scrollBody>table.display', ui.panel).dataTable();
+			if ( oTable.length > 0 ) {
+				oTable.fnAdjustColumnSizing();
+			}
+			ttInstances = TableTools.fnGetMasters();
+			for (i in ttInstances) {
+			if (ttInstances[i].that.fnResizeRequired()) ttInstances[i].that.fnResizeButtons();
+				}
+		}
+	} );
+	});
+</script>
+
+</head>
+<body>
+<div align="right">
+<a href="/logout/">LOGOUT</a>
+</div>
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Job Details</a></li>
+		<li><a href="#tabs-2">Candidate Details</a></li>
+	</ul>
+
+<div id="tabs-1">
+
+<form method="POST" action="/recruit/add_job/" class="search_form">
+<input type="submit" value="Add Job" class="mybutton">
+</form>
+
+{%if job_result %}
+<table border="1" id="tableId">
+<thead >
+<tr>
+
+<th>
+Job Title
+</th>
+
+<th>
+Department
+</th>
+
+<th>
+Number Of Positions
+</th>
+
+<th>
+Skill Set
+</th>
+
+<th>
+Opening Status
+</th>
+
+<th>
+Location
+</th>
+
+<th>
+Post Opened
+</th>
+
+<th>
+Closing Date
+</th>
+
+<th>
+Designation
+</th>
+
+<th>
+Roles and Responsibilities
+</th>
+
+
+
+<th>
+Job Type
+</th>
+
+
+<th>
+Country
+</th>
+
+
+<th>
+Min Work Experience
+</th>
+
+<th>
+Max Work Experience
+</th>
+
+<th>
+Validity
+</th>
+<th>
+</th>
+
+</tr>
+</thead>
+<tbody>
+{% for job_record in job_result %}
+<tr>
+<td>{{job_record.job_title}}</td>
+<td>{{job_record.department}}</td>
+<td>{{job_record.number_of_positions}}</td>
+<td>{{job_record.skill_set}}</td>
+<td>{{job_record.job_opening_status}}</td>
+<td>{{job_record.location_name}}</td>
+<td>{{job_record.opening_date}}</td>
+<td>{{job_record.closing_date}}</td>
+<td>{{job_record.designation}}</td>
+<td>{{job_record.roles_and_responsibilities}}</td>
+<td>{{job_record.job_type}}</td>
+<td>{{job_record.country}}</td>
+<td>{{job_record.min_experience}}</td>
+<td>{{job_record.max_experience}}</td>
+<td>{{job_record.validity}}</td>
+<td><form method="POST" action="/recruit/update_job/">
+<input type="hidden" name="job_id" value="{{job_record.id}}" />
+<input type="submit" value="Update" /></form>
+</td>	
+</tr>
+{% endfor %}
+</tbody>
+<!---<tfoot> 
+                       <tr> 
+						<th><input type="text" name="search_job_title" value="Search Job Title" class="search_init" /></th>
+						<th><input type="text" name="search_department" value="Search Department" class="search_init" /></th>
+						<th><input type="text" name="search_positions" value="Search Positions" class="search_init" /></th>
+						<th><input type="text" name="search_skill_set" value="Search Skill Set" class="search_init" /></th> 
+						<th><input type="text" name="search_opening_status" value="Search Opening Status" class="search_init" style="width:80%;height:100%" /></th>
+						<th><input type="text" name="search_location" value="Search Location" class="search_init" /></th>
+                       </tr>
+ </tfoot>--->
+</table>
+{% endif %}
+</div>
+
+
+<div id="tabs-2">
+<form method="POST" action="/recruit/add_candidate/" class="search_form">
+<input type="submit" value="Add Candidate" class="mybutton">
+</form>	
+{%if candidate_result %}
+<table border="1" id="tableId2">
+<thead>
+<tr>
+
+<th>
+Name
+</th>
+
+<th>
+Email Address
+</th>
+
+<th>
+Contact Number
+</th>
+
+<th>
+Skill Set
+</th>
+
+<th>
+Resume
+</th>
+
+
+<th>
+Stage
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Appllied For
+</th>
+
+<th>
+Contact Address
+</th>
+
+<th>
+Passport Number
+</th>
+
+<th>
+Total Work Experience
+</th>
+
+<th>
+Current CTC<br>(in lacs/annum)
+</th>
+
+<th>
+Expected CTC<br>(in lacs/annum)
+</th>
+
+<th>
+Qualification
+</th>
+
+<th>
+Special Achievements
+</th>
+
+
+<th>
+Reference Type
+</th>
+
+<th>
+Referral Name
+</th>
+
+<th>
+Validity
+</th>
+
+<th>
+HR Person
+</th>
+
+<th>
+</th>
+
+<th>
+</th>
+
+</tr>
+</thead>
+
+<tbody>
+{% for candidate_record in candidate_result %}
+<tr>
+
+<td>{{candidate_record.first_name}} {{candidate_record.last_name}}</td>
+
+<td>{{candidate_record.email_address}}</td>
+
+<td>{{candidate_record.contact_number}}</td>
+
+<td>{{candidate_record.skill_set}}</td>
+
+<td>
+<a href="{{MEDIA_URL}}{{candidate_record.resume}}">Download</a>
+</td>
+
+<td>{{candidate_record.stage}}</td>
+
+<td>{{candidate_record.status}}</td>
+
+<td>{{candidate_record.applied_for}}</td>
+
+<td>{{candidate_record.contact_address}}</td>
+
+<td>{{candidate_record.passport_number}}</td>
+
+<td>{{candidate_record.work_experience_years}} 
+Years {{candidate_record.work_experience_months}} Months
+</td>
+
+<td>{{candidate_record.current_ctc}}</td>
+
+<td>{{candidate_record.expected_ctc}}</td>
+
+<td>{{candidate_record.qualification}}<br>From {{candidate_record.institute_name}}
+<br>In year {{candidate_record.year_of_passing}}<br> with {{candidate_record.percentage}}%</td>
+
+<td>{{candidate_record.special_achievement}}</td>
+
+<td>{{candidate_record.reference_type}}</td>
+
+<td>{{candidate_record.referral_name}}</td>
+
+<td>{{candidate_record.validity}}</td>
+
+<td>{{candidate_record.hr_name}}</td>
+
+{% ifequal user_request.user|stringformat:"s" candidate_record.hr_name %}
+<td>
+<form method="POST" action="/recruit/update_candidate_detail/">
+<input type="hidden" name="candidate_id" value="{{candidate_record.id}}" />
+<input type="submit" value="Update Details" />
+</form>
+</td>
+<td>
+<form method="POST" action="/recruit/update_resume/">
+<input type="hidden" name="candidate_id" value="{{candidate_record.id}}" />
+<input type="submit" value="Update Resume" />
+</form>
+</td>
+{% else %}
+{% if user_request.user.is_superuser %} 
+<td>
+<form method="POST" action="/recruit/update_candidate_detail/">
+<input type="hidden" name="candidate_id" value="{{candidate_record.id}}" />
+<input type="submit" value="Update Details" />
+</form>
+</td>
+<td>
+<form method="POST" action="/recruit/update_resume/">
+<input type="hidden" name="candidate_id" value="{{candidate_record.id}}" />
+<input type="submit" value="Update Resume" />
+</form>
+</td>
+{% else %}
+<td></td>
+<td></td>
+{% endif %}
+{% endifequal %}
+</tr>
+{% endfor %}
+</tbody>
+<!---
+<tfoot> 
+                       <tr> 
+						<th><input type="text" name="search_first_name" value="Search First Name" class="search_init" /></th>
+						<th><input type="text" name="search_email" value="Search Email" class="search_init" /></th>
+                       </tr>
+ </tfoot>
+--->
+</table>
+{% endif %}
+</div>
+</div>
+</body>
+</html>

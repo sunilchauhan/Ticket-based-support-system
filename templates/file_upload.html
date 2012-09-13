@@ -1,0 +1,22 @@
+<html>
+<head>
+<link rel="stylesheet" href="{{MEDIA_URL}}/style.css" type="text/css">
+<script type="text/javascript" src="{{MEDIA_URL}}/jquery.js"></script>
+</head>
+<body>
+<form method="POST" action="/upload_file/" enctype="multipart/form-data">
+<label>1.</label><input type="file" size="42" name="attachment1"><br/><br/>
+<label>2.</label><input type="file" size="42" name="attachment2"><br/><br/>
+<label>3.</label><input type="file" size="42" name="attachment3"><br/><br/>
+<label>4.</label><input type="file" size="42" name="attachment4"><br/><br/>
+<label>5.</label><input type="file" size="42" name="attachment5"><br/><br/>
+<label>6.</label><input type="file" size="42" name="attachment6"><br/><br/>
+<label>7.</label><input type="file" size="42" name="attachment7"><br/><br/>
+<label>8.</label><input type="file" size="42" name="attachment8"><br/><br/>
+<label>9.</label><input type="file" size="42" name="attachment9"><br/><br/>
+<label>10.</label><input type="file" size="42" name="attachment10"><br/><br/>
+<input type="hidden" value="{{request_id}}" name="request_id">
+<input type="submit" value="Done" name='submit' id='submit_id'>
+</form>
+</body>
+</html>

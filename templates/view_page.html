@@ -1,0 +1,44 @@
+<html>
+<title> </title>
+<head>
+<link rel="stylesheet" href="{{MEDIA_URL}}/style.css" type="text/css">
+<link rel="stylesheet" href="{{MEDIA_URL}}/markitup_style2.css" type="text/css">
+<link rel="stylesheet" href="{{MEDIA_URL}}/markitup_style.css" type="text/css">
+<script type="text/javascript" src="{{MEDIA_URL}}/jquery.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}/markitup.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}/set.js"></script>
+</head>
+<body>
+{% for request_info in all_info %}
+<div align="center"><font color="blue" size="3">{{request_info.title}}</font></div>
+<label>Request Id: {{request_info.id}}</label><br /><br />
+<label>Creation Date: {{request_info.creation_date}}</label><br /><br />
+<label>Department: {{request_info.department}}</label><br /><br />
+<label>Status: {{request_info.status}}</label><br /><br />
+<label>Priority: {{request_info.priority}}</label><br /><br />
+<label>Last Modified Date: {{request_info.last_modified_date}}</label><br /><br />
+<label>Primary Assignee: {{request_info.primary_assignee}}</label><br /><br />
+<label>Secondary Assignees:<br /></label>
+{% for owners in request_info.request_owners_set.all %}
+{{owners.request_owner}}</br>
+{% endfor %}<br />
+<label>Description: {{request_info.description|safe}}</label><br /><br />
+<label>Attachments: <br /></label>
+{% for attachment in request_info.request_attachment_set.all %}
+{% if attachment.attachment1 %}<a href="{{MEDIA_URL}}{{attachment.attachment1}}">Show attachment</a><br/><br/>{% endif %}
+{% if attachment.attachment2 %}<a href="{{MEDIA_URL}}{{attachment.attachment2}}">Show attachment</a><br/><br/>{% endif %}
+{% if attachment.attachment3 %}<a href="{{MEDIA_URL}}{{attachment.attachment3}}">Show attachment</a><br/><br/>{% endif %}
+{% if attachment.attachment4 %}<a href="{{MEDIA_URL}}{{attachment.attachment4}}">Show attachment</a><br/><br/>{% endif %}
+{% if attachment.attachment5 %}<a href="{{MEDIA_URL}}{{attachment.attachment5}}">Show attachment</a><br/><br/>{% endif %}
+{% if attachment.attachment6 %}<a href="{{MEDIA_URL}}{{attachment.attachment6}}">Show attachment</a><br/><br/>{% endif %}
+{% if attachment.attachment7 %}<a href="{{MEDIA_URL}}{{attachment.attachment7}}">Show attachment</a><br/><br/>{% endif %}
+{% if attachment.attachment8 %}<a href="{{MEDIA_URL}}{{attachment.attachment8}}">Show attachment</a><br/><br/>{% endif %}
+{% if attachment.attachment9 %}<a href="{{MEDIA_URL}}{{attachment.attachment9}}">Show attachment</a><br/><br/>{% endif %}
+{% if attachment.attachment10 %}<a href="{{MEDIA_URL}}{{attachment.attachment10}}">Show attachment</a><br/><br/>{% endif %}
+{% endfor %}
+
+<button type="button" onclick="window.location='/home/'">Back</button>
+<form method="GET" action="/edit_form/" style="display:inline"> <input type="hidden" value="{{request_info.pk}}" name="request_id" /> <input type="submit" value="Comment"></form>
+{% endfor %}
+</body>
+</html>

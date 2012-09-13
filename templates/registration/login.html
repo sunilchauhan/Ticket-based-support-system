@@ -1,0 +1,33 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}/style.css"> 
+</head>
+<body>
+<div style="align=left"><a href='/create_user/'>New User</a></div>
+<form method="post" action="{% url django.contrib.auth.views.login %}">
+{% csrf_token %}
+<div class="container">
+	<div class="header">
+	<img src="{{MEDIA_URL}}header.jpg" width="160px; height:30px;" />
+	</div>
+<div class="login">
+<div class="label">
+{{ form.username.label_tag }}
+{{ form.username }}
+</div>
+
+<div class="label">
+{{ form.password.label_tag }}
+{{ form.password }}
+</div>
+<div class="label1">
+&nbsp;&nbsp;<input class="button blue" type="submit" value="login" />
+</div>
+</div>
+{% if form.errors %}
+<p><font color="red">Your Username and password do not match. Please enter again.</font></p>
+{% endif %}
+</div>
+</form>
+</body>
+</html>

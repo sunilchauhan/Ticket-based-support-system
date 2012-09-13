@@ -1,0 +1,43 @@
+var candidate_id=$("#candidate_id").val();
+var level=$("#level_id").val();
+var candidate_name=$("#candidate_name").val();
+$.getJSON("/recruit/viewable_feedback",{level:level,candidate_id:candidate_id},function(user_feedback){
+$this.attr('title','Candidate:&nbsp;'+candidate_name+'&nbsp;|'+user_feedback);
+
+$this.cluetip({
+closePosition : "title",
+ sticky : false,
+ mouseOutClose : true,
+ tracking:true,
+ waitImage: true, 
+ ajaxCache:false,
+splitTitle: '|',
+ 
+});
+  });
+
+-------------------------------------------------------
+var level=$("#level_id").val();
+$.getJSON("/recruit/viewable_feedback",{level:level,candidate_id:candidate_id},function(user_feedback){
+$('td>a').attr('title','Candidate:&nbsp;'+candidate_name+'&nbsp;|'+user_feedback);
+
+$('td>a').cluetip({
+closePosition : "title",
+ sticky : false,
+ mouseOutClose : true,
+ tracking:true,
+ waitImage: true, 
+ ajaxCache:false,
+splitTitle: '|',
+ 
+});
+  });
+------------------------------------------
+$(function() {
+    $("table#mytable td").mouseover(function() {
+        //The onmouseover code
+    }).click(function() {
+        //The onclick code
+    });
+});
+

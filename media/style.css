@@ -1,0 +1,13 @@
+body {font:Arial 13px normal; color:#000000; background:#fff; }
+.container { width:960px; margin:0 auto; overflow:hidden; border:1px solid #666666; }
+.header {width:960px; float:left; height:60px; background:#3c6b99;  position:relative;}
+.header img { font-size:18px; color:#ffffff; font-weight:bold; position:absolute; top;10px; left:380px; width:160px; height:60px;}
+.login { width:360px; margin:180px 380px; }
+.login .label, .login .label1 { display:block; width:300px; margin:10px 5px; }
+.login .label label, .login .label input { margin:0 5px; }
+.login .label1 { margin:10px 80px; }
+.inner { width:960px; float:left; position:relative; }
+.inner .fields { width:900px; margin:10px 25px; }
+.inner .fields label { display:inline-table; margin;5px; width:120px; }
+.inner .fields input { display:inline; margin;5px; border:1px solid #44444;} 
+/*.inner .fields textarea { width:400px; height:150px;}*/

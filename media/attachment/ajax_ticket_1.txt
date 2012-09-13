@@ -1,0 +1,68 @@
+
+
+[{"total_count": {"3": 1}, "all_user_request": [{"pk": 3, "model": "new_tracker.new_request", "fields": {"status": "Open", "severity": "High", "title": "dsdsdf", "last_modified_date": "05-01-2012", "creation_date": "05-01-2012", "priority": "High", "department": "IT", "primary_assignee": "Neeraja S", "creator": "lal", "description": "Lal has requested on Thu Jan 05 2012 18:19:53:<br />fsdfsdfsdfsdfsd"}}]}]
+
+
+[{"total_count": {"17": 2, "18": 1}, "all_user_request": [
+{"pk": 17, "model": "new_tracker.new_request", "fields": 
+{"status": "Open", "severity": "High", "title": "asasa", "last_modified_date": "08-01-2012", "creation_date": "08-01-2012", "priority": "High", "department": "IT", "primary_assignee": "Nishu Goyal", "creator": "lal", "description": "Lal has requested on Sun Jan 08 2012 14:39:31:<br />asasas"}
+}, 
+{"pk": 18, "model": "new_tracker.new_request", "fields": {"status": "Open", "severity": "High", "title": "zxzx", "last_modified_date": "08-01-2012", "creation_date": "08-01-2012", "priority": "High", "department": "IT", "primary_assignee": "Sunil Chauhan", "creator": "lal", "description": "Lal has requested on Sun Jan 08 2012 14:46:40:<br />xzxzxzxz"
+}
+}
+]
+
+}]
+
+[{"total_count": {"count": 1}, "all_primary_requests": [{"pk": 3, "model": "new_tracker.new_request", "fields": {"status": "Open", "severity": "High", "title": "dsdsdf", "last_modified_date": "05-01-2012", "creation_date": "05-01-2012", "priority": "High", "department": "IT", "primary_assignee": "Neeraja S", "creator": "lal", "description": "Lal has requested on Thu Jan 05 2012 18:19:53:<br />fsdfsdfsdfsdfsd"}}]}]
+
+
+
+
+$.each( assigned_request, function( key, value ){
+			 request_id = value.pk;
+			 title_val = value.fields.title;
+			 primary_assignee_val = value.fields.primary_assignee;
+
+
+
+if ( all_user_request.length == 0 ){
+			$('#user_created_request').html("<font color='blue' size='4'><center>No record available</center></font>");
+			}
+			else
+			{
+			$.each( all_user_request, function( key, value ){
+			 request_id = value.pk;
+			 alert(value.all_user_request.pk);
+			 title_val = value.fields.title;
+			 primary_assignee_val = value.fields.primary_assignee;
+			 creation_date_val = value.fields.creation_date;
+			 department_val = value.fields.department;
+			 description_val = value.fields.description;
+			 var id="/update_request_page/?request_id=" + request_id;
+			 $('#user_created_request').append('<div class="fields"><label>'+ request_id +'<label></label> <a href ="'+id+'">' + title_val + '</a></label><label>'+ creation_date_val + '</label><label>' +
+			  primary_assignee_val + '</label><label>' + department_val+ '</label><label><div class="test">' + description_val + '</div></label><label>'+ title_val +'</label><label> <form method="GET" action="/edit_form/"> <input type="hidden" value='+request_id+' name="request_id" /> <input type="submit" value="Comment"></form> <form method="POST" action="/show_attachment/"> <input type="hidden" value='+request_id+' name="request_id" /> <input type="submit" value="Show attachment"></form> </label> </div>');
+	
+			});
+
+		}// end of If statement
+		
+		$('div.test').expander({
+  slicePoint: 50,
+  widow: 2,
+  expandEffect: 'show',
+  userCollapseText: 'Read less'
+});
+
+
+
+			 request_id = value.pk;
+			 title_val = value.fields.title;
+			 primary_assignee_val = value.fields.primary_assignee;
+			 creation_date_val = value.fields.creation_date;
+			 department_val = value.fields.department;
+			 description_val = value.fields.description;
+			 var id="/update_request_page/?request_id=" + request_id;
+
+
+7738290679

@@ -1,0 +1,20 @@
+<html>
+<head>
+<link rel="stylesheet" href="{{MEDIA_URL}}/style.css" type="text/css">
+<script type="text/javascript" src="{{MEDIA_URL}}/jquery.js"></script>
+</head>
+<body>
+{% for attachment in all_uploaded_file %}
+{% if attachment.attachment1 %}<a href="{{MEDIA_URL}}{{attachment.attachment1}}">Show attachment</a>{% endif %}<br/><br/>
+{% if attachment.attachment2 %}<a href="{{MEDIA_URL}}{{attachment.attachment2}}">Show attachment</a>{% endif %}<br/><br/>
+{% if attachment.attachment3 %}<a href="{{MEDIA_URL}}{{attachment.attachment3}}">Show attachment</a>{% endif %}<br/><br/>
+{% if attachment.attachment4 %}<a href="{{MEDIA_URL}}{{attachment.attachment4}}">Show attachment</a>{% endif %}<br/><br/>
+{% if attachment.attachment5 %}<a href="{{MEDIA_URL}}{{attachment.attachment5}}">Show attachment</a>{% endif %}<br/><br/>
+{% if attachment.attachment6 %}<a href="{{MEDIA_URL}}{{attachment.attachment6}}">Show attachment</a>{% endif %}<br/><br/>
+{% if attachment.attachment7 %}<a href="{{MEDIA_URL}}{{attachment.attachment7}}">Show attachment</a>{% endif %}<br/><br/>
+{% if attachment.attachment8 %}<a href="{{MEDIA_URL}}{{attachment.attachment8}}">Show attachment</a>{% endif %}<br/><br/>
+{% if attachment.attachment9 %}<a href="{{MEDIA_URL}}{{attachment.attachment9}}">Show attachment</a>{% endif %}<br/><br/>
+{% if attachment.attachment10 %}<a href="{{MEDIA_URL}}{{attachment.attachment10}}">Show attachment</a>{% endif %}<br/><br/>
+{% endfor %}
+</body>
+</html>

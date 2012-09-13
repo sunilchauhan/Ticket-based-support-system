@@ -1,0 +1,24 @@
+<html>
+<head>
+<link rel="stylesheet" href="{{MEDIA_URL}}/style.css" type="text/css">
+<script type="text/javascript" src="{{MEDIA_URL}}/jquery.js"></script>
+</head>
+<body>
+<form method="POST" action="/update_attachment/" enctype="multipart/form-data">
+{% for attachment in update_attachment %}
+<label>1.</label><input type="file" size="42" name="attachment1">{% if attachment.attachment1 %}<a href="{{MEDIA_URL}}{{attachment.attachment1}}">Original attachment</a>{% endif %}<br/><br/>
+<label>2.</label><input type="file" size="42" name="attachment2">{% if attachment.attachment2 %}<a href="{{MEDIA_URL}}{{attachment.attachment2}}">Original attachment</a>{% endif %}<br/><br/>
+<label>3.</label><input type="file" size="42" name="attachment3">{% if attachment.attachment3 %}<a href="{{MEDIA_URL}}{{attachment.attachment3}}">Original attachment</a>{% endif %}<br/><br/>
+<label>4.</label><input type="file" size="42" name="attachment4">{% if attachment.attachment4 %}<a href="{{MEDIA_URL}}{{attachment.attachment4}}">Original attachment</a>{% endif %}<br/><br/>
+<label>5.</label><input type="file" size="42" name="attachment5">{% if attachment.attachment5 %}<a href="{{MEDIA_URL}}{{attachment.attachment5}}">Original attachment</a>{% endif %}<br/><br/>
+<label>6.</label><input type="file" size="42" name="attachment6">{% if attachment.attachment6 %}<a href="{{MEDIA_URL}}{{attachment.attachment6}}">Original attachment</a>{% endif %}<br/><br/>
+<label>7.</label><input type="file" size="42" name="attachment7">{% if attachment.attachment7 %}<a href="{{MEDIA_URL}}{{attachment.attachment7}}">Original attachment</a>{% endif %}<br/><br/>
+<label>8.</label><input type="file" size="42" name="attachment8">{% if attachment.attachment8 %}<a href="{{MEDIA_URL}}{{attachment.attachment8}}">Original attachment</a>{% endif %}<br/><br/>
+<label>9.</label><input type="file" size="42" name="attachment9">{% if attachment.attachment9 %}<a href="{{MEDIA_URL}}{{attachment.attachment9}}">Original attachment</a>{% endif %}<br/><br/>
+<label>10.</label><input type="file" size="42" name="attachment10">{% if attachment.attachment10 %}<a href="{{MEDIA_URL}}{{attachment.attachment10}}">Original attachment</a>{% endif %}<br/><br/>
+{% endfor %}
+<input type="hidden" value="{{request_id}}" name="request_id">
+<input type="submit" value="Done" name='submit' id='submit_id'>
+</form>
+</body>
+</html>

@@ -1,0 +1,17 @@
+
+<script type="text/javascript">
+$(document).ready(function(){
+if ($("#attach_flag").not(":checked")){
+$(this).val('False');
+}
+$('#attach_flag').change(function(){
+if ($("#attach_flag").is(":checked")){
+$(this).val('True');
+}
+else
+{
+$(this).val('False');
+}	
+});
+});
+</script>

@@ -1,0 +1,61 @@
+<html>
+<title> </title>
+<head>
+<link rel="stylesheet" href="{{MEDIA_URL}}/style.css" type="text/css">
+<link rel="stylesheet" href="{{MEDIA_URL}}/markitup_style2.css" type="text/css">
+<link rel="stylesheet" href="{{MEDIA_URL}}/markitup_style.css" type="text/css">
+<script type="text/javascript" src="{{MEDIA_URL}}/jquery.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}/markitup.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}/set.js"></script>
+
+<script type="text/javascript" >
+   $(document).ready(function() {
+      $("#id_comment").markItUp(mySettings);
+   });
+</script>
+
+</head>
+
+<body>
+
+
+<div class="container">
+	<div class="header">
+	<img src="{{MEDIA_URL}}header.jpg" width="160px; height:30px;" />
+	<div align="right">
+	<a href="/logout/">LOGOUT</a>
+	</div>
+</div>
+
+<form method="POST" action="/edit_comment/" id="myform">
+
+<div class="fields">
+		<label>Comment</label>
+		<textarea name="comment" id="id_comment"></textarea>
+		<input type="hidden" name="request_id" value="{{request_id}}">
+		
+		<div>
+		
+		
+		<label>Status:</label> 
+			
+			<select name="status">
+				<option  selected="selected">Open</option>
+				<option>On-hold</option>
+				<option>Closed</option>			
+			</select>
+		
+				
+		</div>
+		
+</div>
+
+<div class="fields">
+		<label></label>
+		<input id="id_submit" type="submit" value="Submit" />
+		<button type="button" onclick="window.location='/home/'">Back</button>
+</div>
+
+<body>
+</html>
+		

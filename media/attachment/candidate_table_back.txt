@@ -1,0 +1,188 @@
+<div id="tabs-2">
+<form method="POST" action="/recruit/add_candidate/" class="search_form">
+<input type="submit" value="Add Candidate" class="mybutton">
+</form>	
+{%if candidate_result %}
+<table border="1" id="tableId2">
+<thead>
+<tr>
+
+<th>
+Name
+</th>
+
+<th>
+Email Address
+</th>
+
+<th>
+Contact Number
+</th>
+
+<th>
+Skill Set
+</th>
+
+<th>
+Resume
+</th>
+
+
+<th>
+Stage
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Appllied For
+</th>
+
+<th>
+Contact Address
+</th>
+
+<th>
+Passport Number
+</th>
+
+<th>
+Total Work Experience
+</th>
+
+<th>
+Current CTC<br>(in lacs/annum)
+</th>
+
+<th>
+Expected CTC<br>(in lacs/annum)
+</th>
+
+<th>
+Qualification
+</th>
+
+<th>
+Special Achievements
+</th>
+
+
+<th>
+Reference Type
+</th>
+
+<th>
+Referral Name
+</th>
+
+<th>
+Validity
+</th>
+
+<th>
+HR Person
+</th>
+
+<th>
+</th>
+
+<th>
+</th>
+
+</tr>
+</thead>
+
+<tbody>
+{% for candidate_record in candidate_result %}
+<tr>
+
+<td>{{candidate_record.first_name}} {{candidate_record.last_name}}</td>
+
+<td>{{candidate_record.email_address}}</td>
+
+<td>{{candidate_record.contact_number}}</td>
+
+<td>{{candidate_record.skill_set}}</td>
+
+<td>
+<a href="{{MEDIA_URL}}{{candidate_record.resume}}">Download</a>
+</td>
+
+<td>{{candidate_record.stage}}</td>
+
+<td>{{candidate_record.status}}</td>
+
+<td>{{candidate_record.applied_for}}</td>
+
+<td>{{candidate_record.contact_address}}</td>
+
+<td>{{candidate_record.passport_number}}</td>
+
+<td>{{candidate_record.work_experience_years}} 
+Years {{candidate_record.work_experience_months}} Months
+</td>
+
+<td>{{candidate_record.current_ctc}}</td>
+
+<td>{{candidate_record.expected_ctc}}</td>
+
+<td>{{candidate_record.qualification}}<br>From {{candidate_record.institute_name}}
+<br>In year {{candidate_record.year_of_passing}}<br> with {{candidate_record.percentage}}%</td>
+
+<td>{{candidate_record.special_achievement}}</td>
+
+<td>{{candidate_record.reference_type}}</td>
+
+<td>{{candidate_record.referral_name}}</td>
+
+<td>{{candidate_record.validity}}</td>
+
+<td>{{candidate_record.hr_name}}</td>
+
+{% ifequal user_request.user|stringformat:"s" candidate_record.hr_name %}
+<td>
+<form method="POST" action="/recruit/update_candidate_detail/">
+<input type="hidden" name="candidate_id" value="{{candidate_record.id}}" />
+<input type="submit" value="Update Details" />
+</form>
+</td>
+<td>
+<form method="POST" action="/recruit/update_resume/">
+<input type="hidden" name="candidate_id" value="{{candidate_record.id}}" />
+<input type="submit" value="Update Resume" />
+</form>
+</td>
+{% else %}
+{% if user_request.user.is_superuser %} 
+<td>
+<form method="POST" action="/recruit/update_candidate_detail/">
+<input type="hidden" name="candidate_id" value="{{candidate_record.id}}" />
+<input type="submit" value="Update Details" />
+</form>
+</td>
+<td>
+<form method="POST" action="/recruit/update_resume/">
+<input type="hidden" name="candidate_id" value="{{candidate_record.id}}" />
+<input type="submit" value="Update Resume" />
+</form>
+</td>
+{% else %}
+<td></td>
+<td></td>
+{% endif %}
+{% endifequal %}
+</tr>
+{% endfor %}
+</tbody>
+
+<tfoot> 
+                       <tr> 
+						<th><input type="text" name="search_first_name" value="Search First Name" class="search_init" /></th>
+                       </tr>
+ </tfoot>
+
+</table>
+{% endif %}
+</div>

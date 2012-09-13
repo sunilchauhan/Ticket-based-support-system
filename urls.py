@@ -1,0 +1,26 @@
+from django.conf.urls.defaults import patterns
+from django.conf import settings
+urlpatterns = patterns('',
+    (r'^$','django.contrib.auth.views.login'),
+    (r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),
+    ('^logout/$', 'django.contrib.auth.views.logout'),
+    (r'^login/$', 'django.contrib.auth.views.login'),
+    (r'^create_new_request/$', 'new_tracker.views.create_new_request'),
+    (r'^get_all_user_request/$', 'new_tracker.views.get_all_user_request'),
+    (r'^upload_file/$', 'new_tracker.views.upload_file'),
+    (r'^show_attachment/$', 'new_tracker.views.show_attachment'),
+    (r'^view_page/$', 'new_tracker.views.view_page'),
+    (r'^get_all_primary_assigned_request/$', 'new_tracker.views.get_all_primary_assigned_request'),
+    (r'^get_all_assigned_request/$', 'new_tracker.views.get_all_assigned_request'),  
+    (r'^update_attachment/$', 'new_tracker.views.update_attachment'), 
+    (r'^create_new/$', 'new_tracker.views.create_new'),
+    (r'^update_request_page/$', 'new_tracker.views.update_request_page'),
+    (r'^update_request/$', 'new_tracker.views.update_request'),
+    (r'^edit_form/$', 'new_tracker.views.edit_form'),
+    (r'^create_user/$', 'new_tracker.views.create_user'),
+    (r'^edit_comment/$', 'new_tracker.views.edit_comment'),
+    (r'^index/$', 'new_tracker.views.index'), 
+    (r'^home/$', 'new_tracker.views.index'), 
+    (r'^checkusername/$', 'new_tracker.views.checkusername'),
+    (r'^create_login/$', 'new_tracker.views.create_login')
+)
